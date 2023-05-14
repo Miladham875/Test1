@@ -21,7 +21,7 @@ namespace TestProject.Areas.Identity
                         context.Configuration.GetConnectionString("TestProjectContext1Connection")));
 
                 services.AddDefaultIdentity<TestProjectUser>(options => options.SignIn.RequireConfirmedAccount = false)
-                    .AddEntityFrameworkStores<TestProjectContext1>();
+                    .AddEntityFrameworkStores<TestProjectContext1>().AddDefaultTokenProviders();
             });
         }
     }

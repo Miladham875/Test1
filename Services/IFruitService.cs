@@ -13,6 +13,6 @@ namespace Services
         Task<Fruit> GetById(int id);
         Task Delete(int id);
         Task Update(Fruit model);
-        Task CreateReport(Fruit model);
+        Task<string> CreateReport(Fruit model);
     }
 }

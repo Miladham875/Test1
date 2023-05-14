@@ -25,7 +25,7 @@ namespace Services
 
         public async  Task<List<Fruit>> GetAll()
         {
-            return _repository.GetAll().ToList();
+            return _repository.GetAll()?.ToList();
         }
 
         public async Task<Fruit> GetById(int id)
@@ -50,13 +50,14 @@ namespace Services
 
 
 
-        public async Task CreateReport(Fruit model)
+        public async Task<string> CreateReport(Fruit model)
         {
             var entity=new Fruit();
             entity.Name = model.Name;
             entity.CreatedDateTime = model.CreatedDateTime;
             entity.Color = model.Color;           
             _repository.Insert(entity);
+            return "Success";
             
         }
 

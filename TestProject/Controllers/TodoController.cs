@@ -33,14 +33,25 @@ namespace TestProject.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<Fruit>>> GetFruits(string searchText)
         {
+            try
+            {         
+            
+
+
             var result=await _fruitService.GetAll();
             if (!string.IsNullOrWhiteSpace(searchText))
             {
                 result = result.Where(a => a.Color.Contains(searchText) || a.Name.Contains(searchText)
                   || a.Id.ToString().Contains(searchText)).ToList();
             }
+                return result;
+            }
+            catch (Exception ex)
+            {
 
-            return result;
+                throw;
+            }
+            
         }
 
         // GET: api/Todo/5

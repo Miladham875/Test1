@@ -12,6 +12,10 @@ namespace TestProject.Areas.Identity.Data
     // Add profile data for application users by adding properties to the TestProjectUser class
     public class TestProjectUser : IdentityUser<int>
     {
+        public TestProjectUser():base()
+        {
+
+        }
       
     }
 

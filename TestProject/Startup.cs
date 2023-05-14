@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestProject.Areas.Identity.Data;
 using TestProject.Data;
 
 namespace TestProject
@@ -36,6 +37,12 @@ namespace TestProject
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddDbContext<TestProjectContext1>(options =>
+                  options.UseSqlServer(
+                      Configuration.GetConnectionString("TestProjectContext1Connection")));
+
+
+
             var key = Encoding.ASCII.GetBytes("@#MY_BIG_SECRET_KEY@#");
 
             services.AddAuthentication(options =>
@@ -48,7 +55,7 @@ namespace TestProject
                 {
                     OnTokenValidated = context =>
                     {
-                        var userMachine = context.HttpContext.RequestServices.GetRequiredService<UserManager<TestProjectContext1>>();
+                        var userMachine = context.HttpContext.RequestServices.GetRequiredService<UserManager<TestProjectUser>>();
                         var user = userMachine.GetUserAsync(context.HttpContext.User);
                         if (user == null)
                             context.Fail("UnAuthorized");
@@ -73,9 +80,7 @@ namespace TestProject
                      Configuration.GetConnectionString("DefaultConnection"),
                      b => b.MigrationsAssembly(typeof(TestApplicationContext).Assembly.FullName)));
 
-            services.AddDbContext<TestProjectContext1>(options =>
-                  options.UseSqlServer(
-                      Configuration.GetConnectionString("TestProjectContext1Connection")));
+            
 
 
             services.AddSwaggerGen(c =>
