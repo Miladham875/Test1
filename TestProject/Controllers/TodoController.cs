@@ -112,6 +112,8 @@ namespace TestProject.Controllers
         [Authorize]
         public async Task<ActionResult<Fruit>> PostFruit(Fruit fruit)
         {
+            var currentUser=await _userManager.GetUserAsync(HttpContext.User);
+            fruit.CreatorUserId = currentUser.Id;
             await _fruitService.CreateReport(fruit);           
 
             return CreatedAtAction("GetFruit", new { id = fruit.Id }, fruit);

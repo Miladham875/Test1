@@ -55,7 +55,8 @@ namespace Services
             var entity=new Fruit();
             entity.Name = model.Name;
             entity.CreatedDateTime = model.CreatedDateTime;
-            entity.Color = model.Color;           
+            entity.Color = model.Color;
+            entity.CreatorUserId = model.CreatorUserId;
             _repository.Insert(entity);
             return "Success";
             

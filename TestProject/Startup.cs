@@ -83,10 +83,7 @@ namespace TestProject
             
 
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TestProject", Version = "v1" });
-            });
+            services.AddSwaggerGen();
 
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
@@ -102,7 +99,7 @@ namespace TestProject
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TestProject v1"));
+                app.UseSwaggerUI();
             }
 
             app.UseHttpsRedirection();
