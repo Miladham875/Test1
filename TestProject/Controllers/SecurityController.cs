@@ -104,7 +104,7 @@ namespace TestProject.Controllers
                 {
                     sb.Append(error.Description);
                 }
-                return Ok(new { Result = $"Register Fail: { sb.ToString()}" });
+                return BadRequest(new { Result = $"Register Fail: { sb.ToString()}" });
         }
     }
 
